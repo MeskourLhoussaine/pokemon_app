@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <ImageView
+            android:id="@+id/imagePok"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:background="@drawable/img_launcher_background"
+            tools:srcCompat="@tools:sample/avatars"
+            android:scaleType="fitXY"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:pointerIcon="cell"
+            android:elevation="60dp"/>
+
+        <TextView
+            android:id="@+id/textName"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+
+            android:layout_margin="20dp"
+
+            android:elevation="70dp"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#03A9F4"
+            android:textSize="30sp"
+            android:textStyle="italic"
+
+            />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="GmIndex"
+            android:textColor="#03A9F4"
+            android:textStyle="bold"
+
+            />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progressIndex"
+            android:layout_width="206dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginRight="20dp"
+            app:indicatorColor="#F10E0E"
+            app:trackColor="#E1E1E1"
+            app:trackCornerRadius="100dp"
+            app:trackThickness="22dp" />
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="LEVEL"
+            android:textColor="#03A9F4"
+            android:textStyle="bold"/>
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progressLevel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:trackCornerRadius="100dp"
+            app:trackThickness="22dp"
+            app:indicatorColor="#FBC931"
+            app:trackColor="#E1E1E1"/>
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="experence"
+            android:textColor="#03A9F4"
+            android:textStyle="bold"/>
+
+
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progressExp"
+            android:layout_width="186dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:indicatorColor="#111111"
+            app:trackColor="#E1E1E1"
+            app:trackCornerRadius="100dp"
+            app:trackThickness="22dp" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="Height"
+            android:textColor="#03A9F4"
+            android:textStyle="bold"/>
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progressheih"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            app:indicatorColor="#03FA0D"
+            app:trackColor="#E1E1E1"
+            app:trackCornerRadius="100dp"
+            app:trackThickness="22dp" />
+
+    </LinearLayout>
+</RelativeLayout>
