@@ -28,6 +28,7 @@ Si l'utilisateur tape sur un Pokémon, un nouvel écran s'ouvrira affichant plus
 
 <div align="center"> 
   <img src="screenshoots/1.jpeg" width="300"> 
+     &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="screenshoots/2.jpeg" width="300">  
 </div> 
 
