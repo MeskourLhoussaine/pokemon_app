@@ -151,6 +151,24 @@ public interface PokeaService {
 ```
 ### Class 
 ```java
+package com.example.myapp;
+
+import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapp.connection.RetrofitConnection;
+import com.example.myapp.models.PokemonInfo;
+import com.squareup.picasso.Picasso;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -170,59 +188,46 @@ public class PokemonActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pokemon);
-
-        // Initialisation des vues (TextView, ImageView, ProgressBar)
-        this.progressBarExp = findViewById(R.id.progressExp);
-        //:*********
-        this.progressBarindex=findViewById(R.id.progressIndex);
-        this.progressBarlevel=findViewById(R.id.progressLevel);
-        this.progressBarheight=findViewById(R.id.progressheih);
-
-        // Récupération de l'intent
-        this.intent = getIntent();
-        int id = Integer.parseInt(intent.getStringExtra("id"));
-        this.textView = findViewById(R.id.textName);
+        // Création d'une instance de ProgressBar avec l'id R.id.progressExp
+        this.progressBarExp = findViewById(R.id.progressExp); 
+      // Création d'une instance de ProgressBar avec l'id R.id.progressIndex
+        this.progressBarindex=findViewById(R.id.progressIndex); 
+        // Création d'une instance de ProgressBar avec l'id R.id.progressLevel
+        this.progressBarlevel=findViewById(R.id.progressLevel); 
+        // Création d'une instance de ProgressBar avec l'id R.id.progressheih
+        this.progressBarheight=findViewById(R.id.progressheih); 
+        // Récupération de l'intent qui a démarré cette activité
+        this.intent = getIntent(); 
+        // Récupération de la valeur de l'extra "id" de l'intent et conversion en entier
+        int id = Integer.parseInt(intent.getStringExtra("id")); 
+        // Création d'une instance de TextView avec l'id R.id.textName
+        this.textView = findViewById(R.id.textName); 
+         // Création d'une instance de ImageView avec l'id R.id.imagePok
         this.imageView = findViewById(R.id.imagePok);
-
-        // Définition du texte pour le TextView
-        textView.setText(intent.getStringExtra("name"));
-
-        // Chargement de l'image dans l'ImageView à l'aide de Picasso
+        
+        // Définition du texte de textView avec la valeur de l'extra "name" de l'intent
+        textView.setText(intent.getStringExtra("name")); 
+         // Chargement d'une image dans imageView à partir de l'URL spécifiée dans l'extra "imagePok" de l'intent
         Picasso.get().load(intent.getStringExtra("imagePok")).into(imageView);
 
-        // Appel à l'API Retrofit pour obtenir les informations sur le Pokémon
-        RetrofitConnection.getPokemonInfoCall(id).enqueue(new Callback<PokemonInfo>() {
+        RetrofitConnection.getPokemonInfoCall(id).enqueue(new Callback<PokemonInfo>() { 
+        // Appel asynchrone à l'API avec Retrofit pour obtenir les informations sur un Pokémon
             @Override
             public void onResponse(Call<PokemonInfo> call, Response<PokemonInfo> response) {
+             // Vérification si la réponse de l'API n'est pas réussie
                 if(!response.isSuccessful()){
-                    Log.i("POKEMON", "ERROR" + response.message());
+                // Affichage d'un message d'erreur dans les logs avec le code d'erreur de la réponse
+                    Log.i("POKEMON", "ERROR" + response.message()); 
                     return;
                 }
 
-                // Mise en place de la valeur maximale et de l'animation de progression pour la ProgressBar de l'expérience
-                progressBarExp.setMax(200);
-                ObjectAnimator.ofInt(progressBarExp, "progress", response.body().getExp()).setDuration(1000).start();
+                progressBarExp.setMax(200); // Définition de la valeur maximale de progressBarExp à 200
+                ObjectAnimator.ofInt(progressBarExp, "progress", response.body().getExp()).setDuration(1000).start(); 
+                // Animation de la progression de progressBarExp jusqu'à la valeur d'expérience du Pokémon obtenue dans la réponse de l'API
 
-                // Mise en place de la valeur maximale et de l'animation de progression pour la ProgressBar de l'index
-                progressBarindex.setMax(200);
-                ObjectAnimator.ofInt(progressBarindex, "progress", response.body().getExp()).setDuration(1000).start();
+                progressBarindex.setMax(200); // Définition de la valeur maximale de progressBarindex à 200
+                ObjectAnimator.ofInt(progressBarindex, "progress", response.body().getIndex()).setDuration(1000).
 
-                // Mise en place de la valeur maximale et de l'animation de progression pour la ProgressBar du niveau
-                progressBarlevel.setMax(200);
-                ObjectAnimator.ofInt(progressBarlevel, "progress", response.body().getExp()).setDuration(1000).start();
-
-                // Mise en place de la valeur maximale et de l'animation de progression pour la ProgressBar de la hauteur
-                progressBarheight.setMax(200);
-                ObjectAnimator.ofInt(progressBarheight, "progress", response.body().getExp()).setDuration(1000).start();
-            }
-
-            @Override
-            public void onFailure(Call<PokemonInfo> call, Throwable t) {
-                Log.i("POKEMON", "ERROR" + t.getMessage());
-            }
-        });
-    }
-}
 ```
 
 ## Aplication interface
