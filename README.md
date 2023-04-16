@@ -31,7 +31,7 @@ public class Pokemon {
     private int number;
     private String name;
     private String url;
-
+//Getters et Seters
     public String getName() {
         return name;
     }
@@ -58,7 +58,68 @@ public class Pokemon {
     }
 }
 ```
+###Clase RetrofitConnection.java
+```java 
+package com.example.myapp.connection;
 
+import com.example.myapp.models.PokemonInfo;
+import com.example.myapp.models.PokemonRespuesta;
+import com.example.myapp.pokeapi.PokeaService;
+
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
+public class RetrofitConnection {
+    private static Retrofit retrofit;
+
+    // Constructeur privé de la classe RetrofitConnection
+    private RetrofitConnection(){
+        // Crée un nouvel objet Retrofit en utilisant le Builder
+        // avec l'URL de base de l'API, le convertisseur GsonConverterFactory
+        // et l'enregistre dans la variable statique retrofit
+        retrofit=new Retrofit.Builder()
+                .baseUrl("https://pokeapi.co/api/v2/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
+
+    // Méthode privée pour obtenir l'objet Retrofit
+    private static Retrofit getRetrofit(){
+        // Vérifie si retrofit est null, et si oui, crée une nouvelle instance
+        // de RetrofitConnection (en appelant le constructeur privé)
+        // et enregistre cette instance dans la variable statique retrofit
+        if(Objects.isNull(retrofit)) new RetrofitConnection();
+        return retrofit;
+    }
+
+    // Méthode privée pour obtenir l'objet PokeaService
+    private static PokeaService getPokeaService(){
+        // Appelle la méthode getRetrofit() pour obtenir l'objet Retrofit,
+        // puis utilise la méthode create() pour créer et retourner un objet PokeaService
+        return getRetrofit().create(PokeaService.class);
+    }
+
+    // Méthode publique pour obtenir un objet Call<PokemonRespuesta> pour la liste des pokémons
+    public static Call<PokemonRespuesta> getPokemonRespuestaCall(int limit, int offset){
+        // Appelle la méthode getPokeaService() pour obtenir l'objet PokeaService,
+        // puis appelle la méthode obtenerListaPokemon() de cet objet en passant les paramètres limit et offset,
+        // et retourne l'objet Call<PokemonRespuesta> résultant
+        return getPokeaService().obtenerListaPokemon(20,offset);
+    }
+
+    // Méthode publique pour obtenir un objet Call<PokemonInfo> pour les informations d'un pokémon
+    public static Call<PokemonInfo> getPokemonInfoCall(int id){
+        // Appelle la méthode getPokeaService() pour obtenir l'objet PokeaService,
+        // puis appelle la méthode getPokemonInfoCall() de cet objet en passant le paramètre id,
+        // et retourne l'objet Call<PokemonInfo> résultant
+        return getPokeaService().getPokemonInfoCall(id);
+    }
+
+}
+```
 
 ## Aplication interface
 
