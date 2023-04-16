@@ -120,6 +120,35 @@ public class RetrofitConnection {
 
 }
 ```
+###classe 
+```java
+package com.example.myapp.pokeapi;
+
+import com.example.myapp.models.PokemonInfo;
+import com.example.myapp.models.PokemonRespuesta;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
+
+public interface PokeaService {
+    // Déclaration de l'annotation GET pour la méthode obtenerListaPokemon()
+    // avec le chemin "pokemon" pour l'URL de l'API
+    // et deux paramètres de requête "limit" et "offset"
+    // qui seront substitués dans l'URL finale
+    // et un objet Call<PokemonRespuesta> comme type de retour de la méthode
+    @GET("pokemon")
+    Call<PokemonRespuesta> obtenerListaPokemon(@Query("limit") int limit, @Query("offset")  int offset);
+
+    // Déclaration de l'annotation GET pour la méthode getPokemonInfoCall()
+    // avec le chemin "pokemon/{id}" pour l'URL de l'API
+    // et un chemin de substitution "{id}" pour le paramètre id de la méthode
+    // qui sera substitué dans l'URL finale
+    // et un objet Call<PokemonInfo> comme type de retour de la méthode
+    @GET("pokemon/{id}")
+    Call<PokemonInfo> getPokemonInfoCall(@Path("id") int id);
+}
+```
 
 ## Aplication interface
 
