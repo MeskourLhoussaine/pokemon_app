@@ -27,8 +27,8 @@ Si l'utilisateur tape sur un Pokémon, un nouvel écran s'ouvrira affichant plus
 ## Aplication interface
 
 <div align="center"> 
-  <img src="https://github.com/MeskourLhoussaine/pokemon/blob/main/scrine/1.jpeg" width="300"> 
-  <img src="https://github.com/MeskourLhoussaine/pokemon/blob/main/scrine/2.jpeg" width="300">  
+  <img src="screenshoots/1.jpeg" width="300"> 
+  <img src="screenshoots/2.jpeg" width="300">  
 </div> 
 
 
