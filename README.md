@@ -149,6 +149,81 @@ public interface PokeaService {
     Call<PokemonInfo> getPokemonInfoCall(@Path("id") int id);
 }
 ```
+### Class 
+```java
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class PokemonActivity extends AppCompatActivity {
+    private Intent intent;
+    private TextView textView;
+    private ImageView imageView;
+    private ProgressBar progressBarExp;
+    //****
+    private ProgressBar progressBarindex;
+    private ProgressBar progressBarlevel;
+    //level_learned_at
+    private ProgressBar progressBarheight;
+    @SuppressLint("MissingInflatedId")
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_pokemon);
+
+        // Initialisation des vues (TextView, ImageView, ProgressBar)
+        this.progressBarExp = findViewById(R.id.progressExp);
+        //:*********
+        this.progressBarindex=findViewById(R.id.progressIndex);
+        this.progressBarlevel=findViewById(R.id.progressLevel);
+        this.progressBarheight=findViewById(R.id.progressheih);
+
+        // Récupération de l'intent
+        this.intent = getIntent();
+        int id = Integer.parseInt(intent.getStringExtra("id"));
+        this.textView = findViewById(R.id.textName);
+        this.imageView = findViewById(R.id.imagePok);
+
+        // Définition du texte pour le TextView
+        textView.setText(intent.getStringExtra("name"));
+
+        // Chargement de l'image dans l'ImageView à l'aide de Picasso
+        Picasso.get().load(intent.getStringExtra("imagePok")).into(imageView);
+
+        // Appel à l'API Retrofit pour obtenir les informations sur le Pokémon
+        RetrofitConnection.getPokemonInfoCall(id).enqueue(new Callback<PokemonInfo>() {
+            @Override
+            public void onResponse(Call<PokemonInfo> call, Response<PokemonInfo> response) {
+                if(!response.isSuccessful()){
+                    Log.i("POKEMON", "ERROR" + response.message());
+                    return;
+                }
+
+                // Mise en place de la valeur maximale et de l'animation de progression pour la ProgressBar de l'expérience
+                progressBarExp.setMax(200);
+                ObjectAnimator.ofInt(progressBarExp, "progress", response.body().getExp()).setDuration(1000).start();
+
+                // Mise en place de la valeur maximale et de l'animation de progression pour la ProgressBar de l'index
+                progressBarindex.setMax(200);
+                ObjectAnimator.ofInt(progressBarindex, "progress", response.body().getExp()).setDuration(1000).start();
+
+                // Mise en place de la valeur maximale et de l'animation de progression pour la ProgressBar du niveau
+                progressBarlevel.setMax(200);
+                ObjectAnimator.ofInt(progressBarlevel, "progress", response.body().getExp()).setDuration(1000).start();
+
+                // Mise en place de la valeur maximale et de l'animation de progression pour la ProgressBar de la hauteur
+                progressBarheight.setMax(200);
+                ObjectAnimator.ofInt(progressBarheight, "progress", response.body().getExp()).setDuration(1000).start();
+            }
+
+            @Override
+            public void onFailure(Call<PokemonInfo> call, Throwable t) {
+                Log.i("POKEMON", "ERROR" + t.getMessage());
+            }
+        });
+    }
+}
+```
 
 ## Aplication interface
 
