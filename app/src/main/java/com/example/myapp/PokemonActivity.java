@@ -64,13 +64,13 @@ public class PokemonActivity extends AppCompatActivity {
                 ObjectAnimator.ofInt(progressBarExp, "progress", response.body().getExp()).setDuration(1000).start();
 
                 progressBarindex.setMax(200);
-                ObjectAnimator.ofInt(progressBarindex, "progress", response.body().getExp()).setDuration(1000).start();
+                ObjectAnimator.ofInt(progressBarindex, "progress", response.body().getIndex()).setDuration(1000).start();
 
                 progressBarlevel.setMax(200);
-                ObjectAnimator.ofInt(progressBarlevel, "progress", response.body().getExp()).setDuration(1000).start();
+                ObjectAnimator.ofInt(progressBarlevel, "progress", response.body().getLevel()).setDuration(1000).start();
 
                 progressBarheight.setMax(200);
-                ObjectAnimator.ofInt(progressBarheight, "progress", response.body().getExp()).setDuration(1000).start();
+                ObjectAnimator.ofInt(progressBarheight, "progress", response.body().getHeight()).setDuration(1000).start();
 
 
 
